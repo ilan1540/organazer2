@@ -1,3 +1,6 @@
+html {
+  height: 100%;
+}
 body {
   margin: 0;
   font-family: 'Frank Ruhl Libre', serif;
@@ -5,11 +8,44 @@ body {
   text-align: right;
   background-color: rgb(233, 231, 228);
 }
-
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(32, 24, 24);
+  color: white;
+  text-align: right;
+}
+/*
+a:hover {
+  font-weight: bold;
+  font-size: larger; 
+}
+*/
 ul.navbar-nav {
   padding-right: 0;
 }
 
 a.dropdown-item {
   padding: 4px;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.popup .card-body {
+  background-color: rgb(235, 149, 88);
+  font-weight: 900;
+  color: darkmagenta;
+}
+
+.table td,
+.table th {
+  padding: 0;
 }

@@ -1,12 +1,32 @@
+//import React from 'react'
+import firebase from 'firebase/app'
+
 import {
-  PICK_DATE,
-  SAVE_SECOM,
-  SAVE_PRATIM,
-  HAFKADOT,
-  SET_HAFKADA,
-  ADD_HAFKADA,
+//  PICK_DATE,
+//  SAVE_SECOM,
+// SAVE_PRATIM,
+//  HAFKADOT,
+//  SET_HAFKADA,
+ // ADD_HAFKADA,
+  // from hear
   SET_EXCEL_FILE,
+  SET_IMG_URL,
+  ADD_KOTARET,
+  DEL_KOTARET,
 } from './types';
+
+//set img url to redux
+export const setUrlHosting = (path , fileName)=>{
+  let storageRef= firebase.storage().ref()
+  
+   storageRef.child(`${path}/${fileName}`).getDownloadURL().then((url)=>{
+     console.log(url)
+     return {
+      type: SET_IMG_URL,
+      payload: url,
+    };
+   })
+  }
 
 // set excel wb to redux
 export const setExcelWb = (wb) => {
@@ -15,6 +35,27 @@ export const setExcelWb = (wb) => {
     payload: wb,
   };
 };
+
+// save kotarot to redux
+export const addKotarot = (kot) => {
+  return {
+    type: ADD_KOTARET,
+    payload: kot,
+  };
+};
+// clear kotarot from redux
+export const delKotarot = (kot) => {
+  return {
+    type: DEL_KOTARET,
+    payload : kot
+    
+  };
+};
+
+
+
+
+/* to delete
 // get the datePicker
 export const getDate = (date) => {
   return {
@@ -62,3 +103,6 @@ export const add_hafkada = (res) => {
     payload: res,
   };
 };
+
+
+*/

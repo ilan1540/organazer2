@@ -30,12 +30,20 @@ export const manage = {
   btnName:'ניהול',
   prams:[
     {
-    href:"/options",
+    href:"/tabOptions",
     name:'אפשרויות'
   },
   {
     href:"/register",
     name:'Register'
+  },
+  {
+    href:"/editprofile",
+    name:'ניהול משתמש'
+  },
+  {
+    href:"/beorimList",
+    name:'רשימת באורים'
   }
 ]
 }

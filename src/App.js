@@ -7,15 +7,18 @@ import store from './componants/redux/store';
 import Routes from './componants/routes/Routes';
 import './App.css';
 import { Navbar } from './componants/layout/Navbar';
+import { Footer } from './componants/layout/Footer';
+
 
 function App() {
   return (
     <Provider store={store}>
       <ReactReduxFirebaseProvider {...rrfProps}>
-    <div>
+    <div id="content">
       <BrowserRouter>
-      <Navbar />
+      <Navbar id="header" />
       <Routes />
+      <Footer id="footer" />
       </BrowserRouter>
       
     </div>

@@ -2,6 +2,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
@@ -31,7 +32,7 @@ firebase.initializeApp(firebaseConfig);
 
 // Initialize other services on firebase instance
 firebase.firestore(); // <- needed if using firestore
-
+export const storage = firebase.storage()
 // Add firebase to reducers
 
 // צריך כדי לקלוט נתונים מ web api

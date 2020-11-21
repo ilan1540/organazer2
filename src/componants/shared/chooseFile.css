@@ -1,0 +1,42 @@
+.choose_file label {
+  display: block;
+  /*  border: 2px dashed #8178d3;*/
+  padding: 1px;
+  width: calc(100% - 20px);
+  margin: 1px;
+  text-align: center;
+  cursor: pointer;
+}
+.choose_file #choose_file {
+  outline: none;
+  opacity: 0;
+  width: 0;
+}
+.choose_file span {
+  font-size: 16px;
+  color: #0a034d;
+}
+
+.choose_file label:hover span {
+  /* text-decoration: underline;*/
+  font-size: larger;
+  color: rgb(119, 10, 12);
+  background-color: burlywood;
+  font-weight: bold;
+}
+
+.progress {
+  width: 18%;
+  height: 12px;
+  display: flex;
+  background: #efefef;
+  overflow: hidden;
+  border-radius: 5px;
+  /* margin-top: 8px;*/
+  position: relative;
+
+  padding: 1px 6px;
+  width: calc(100% - 20px);
+  margin: 6px;
+  text-align: center;
+}

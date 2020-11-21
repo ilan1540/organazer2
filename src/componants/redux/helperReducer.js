@@ -1,27 +1,56 @@
 import {
-  PICK_DATE,
-  SAVE_SECOM,
-  SAVE_PRATIM,
-  HAFKADOT,
-  ADD_HAFKADA,
+//  PICK_DATE,
+//  SAVE_SECOM,
+//  SAVE_PRATIM,
+//  HAFKADOT,
+ // ADD_HAFKADA,
+  // from hear
   SET_EXCEL_FILE,
+  SET_IMG_URL,
+  ADD_KOTARET,
+  DEL_KOTARET
 } from './types';
 
 const initialState = {
-  date: '',
-  secom: '',
-  pratim: '',
-  hafkadot: [],
+ // date: '',
+//  secom: '',
+ // pratim: '',
+  kot: [],
   wb: [],
+  imgUrl: '',
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SET_IMG_URL:
+      return {
+        ...state,
+        wb: action.payload,
+      };
     case SET_EXCEL_FILE:
       return {
         ...state,
         wb: action.payload,
       };
+      case ADD_KOTARET:
+        return {
+          ...state,
+          kot: [...state.kot,  action.payload]
+        };
+
+     case   DEL_KOTARET:
+       return {
+          ...state,
+            kot: action.payload
+       }
+    default:
+      return state;
+  }
+};
+
+
+
+/* to delete
     case PICK_DATE:
       return {
         ...state,
@@ -44,7 +73,7 @@ export default (state = initialState, action) => {
       };
     case ADD_HAFKADA:
       console.log(state.firestore.ordered.kopot[0].hafkadot);
-      /*
+      
       return {
         ...state,
         hafkadot: [
@@ -52,12 +81,9 @@ export default (state = initialState, action) => {
           action.payload,
         ],
       };
-*/
+
       return {
         ...state,
         hafkadot: [...state.hafkadot, action.payload],
       };
-    default:
-      return state;
-  }
-};
+      */
