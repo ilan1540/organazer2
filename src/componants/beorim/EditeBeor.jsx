@@ -5,6 +5,8 @@ import { useSelector} from 'react-redux';
 import { useFirestoreConnect, useFirestore } from 'react-redux-firebase';
 import { SelectUsre } from './SelectUsre';
 import { Kotarot } from './Kotarot';
+import { HeaderHendel } from '../tables/HeaderHendel';
+
 
 
 export const EditeBeor = ({match,history}) => { 
@@ -146,6 +148,7 @@ useEffect(()=>{
       </div>
 
       <div className="col-md-8">
+        <HeaderHendel />
       {eBeor ? (
         <Kotarot
        kotarot={eKotarot}

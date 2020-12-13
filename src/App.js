@@ -5,7 +5,8 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { rrfProps } from './componants/redux/store';
 import store from './componants/redux/store';
 import Routes from './componants/routes/Routes';
-import './App.css';
+import './pages.css';
+import './componants/excel-reader/excel.css'
 import { Navbar } from './componants/layout/Navbar';
 import { Footer } from './componants/layout/Footer';
 

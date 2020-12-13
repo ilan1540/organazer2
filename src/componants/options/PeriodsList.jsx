@@ -7,7 +7,9 @@ export const PeriodsList = () => {
   const fireStore = useFirestore()
 useFirestoreConnect('periods')
 
+
 const periods = useSelector(state => state.firestore.ordered.periods)
+
 const period= useSelector(state => state.firestore.ordered.options[0].actualPeriod)
 
 
@@ -15,12 +17,11 @@ const onSaveClick =()=>{
   if (actualPeriod === '' ) {
     console.log('err');
   } else {
-   const rec = {actualPeriod}
+  const rec= periods.find((r)=> r.period === actualPeriod)
     fireStore.collection('options').doc('actualPeriod').set(rec)
     .then(() =>{
-      
     } ).then(()=>console.log('actual period set success'))
-    .catch((err) => console.log(err))
+   .catch((err) => console.log(err)) 
 }}
 
   return (

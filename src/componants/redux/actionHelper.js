@@ -13,6 +13,10 @@ import {
   SET_IMG_URL,
   ADD_KOTARET,
   DEL_KOTARET,
+  SET_BEOR_INFO,
+  SET_WB_TO_SAVE,
+  SET_EXCEL_JSON,
+  SET_COL_HEADER,
 } from './types';
 
 //set img url to redux
@@ -28,13 +32,30 @@ export const setUrlHosting = (path , fileName)=>{
    })
   }
 
-// set excel wb to redux
+// set excel wb to redux format excel
 export const setExcelWb = (wb) => {
   return {
     type: SET_EXCEL_FILE,
     payload: wb,
   };
 };
+
+// set excel wb to redux format json
+export const setExcelJson = (wb) => {
+  return {
+    type: SET_EXCEL_JSON,
+    payload: wb,
+  };
+};
+// set col Header to redux
+export const setColHeader = (head) => {
+  console.log(head)
+  return {
+    type: SET_COL_HEADER,
+    payload: head,
+  };
+};
+
 
 // save kotarot to redux
 export const addKotarot = (kot) => {
@@ -48,8 +69,24 @@ export const delKotarot = (kot) => {
   return {
     type: DEL_KOTARET,
     payload : kot
-    
+  } 
   };
+// set beor info to redux to save
+export const setBeorInfo = (info) => {
+  return {
+    type: SET_BEOR_INFO,
+    payload : info
+  }
+  };
+
+  // set activ data to save
+export const setDataToSave = (data) => {
+  return {
+    type: SET_WB_TO_SAVE,
+    payload : data
+  
+  };
+
 };
 
 

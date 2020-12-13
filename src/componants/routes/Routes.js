@@ -10,6 +10,9 @@ import { BeorimList } from '../beorim/BeorimList';
 import { EditeBeor } from '../beorim/EditeBeor';
 import { ReadFile } from '../excel/ReadFile';
 import { TabOption } from '../options/TabOption';
+import { DocHeandel } from '../pages/DocHeandel';
+import { KotarotHendel } from '../shared/KotarotHendel';
+import { ShowTable } from '../tables/ShowTable';
 import { EditProfile } from '../usersHeandel/EditProfile';
 //import { ReadExcelFile } from '../fileHeandel/ReadExcelFile';
 //import { Active } from '../pages/Active';
@@ -27,6 +30,9 @@ const Routes = () => {
       <Route exact path="/beorimList/addBeor" component={AddBeor} />
       <Route exact path="/beorimList/editBeor/:id" component={EditeBeor} />
       <Route exact path="/tabOptions" component={TabOption} />
+      <Route exact path="/docs" component={DocHeandel} />
+      <Route exact path="/kotarot" component={KotarotHendel} />
+      <Route exact path="/table" component={ShowTable} />
       </Switch>
   );
 };

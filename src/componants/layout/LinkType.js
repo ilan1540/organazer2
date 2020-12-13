@@ -20,8 +20,12 @@ export const shotef = {
     name:'Read Excel File'
   },
   {
-    href:"/active",
-    name:'Show Activ'
+    href:"/table",
+    name:'הצג טבלאות excel'
+  },
+  {
+    href:"/docs",
+    name:'דוחות'
   }
 ]
 }
@@ -44,6 +48,10 @@ export const manage = {
   {
     href:"/beorimList",
     name:'רשימת באורים'
+  },
+  {
+    href:"/kotarot",
+    name:'ניהול כותרות'
   }
 ]
 }

@@ -17,8 +17,8 @@ export const Navbar = (props) => {
       doc: userId
     },
     {
-      collection: 'options',
-      doc: 'actualPeriod'
+      collection: 'options'/*,
+      doc: 'actualPeriod'*/
     }
 
   ])

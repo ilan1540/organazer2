@@ -1,44 +1,41 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import { useDispatch } from 'react-redux';
-import { setExcelWb } from '../redux/actionHelper';
-import xlsx from 'xlsx';
+import { setExcelWb,setExcelJson } from '../redux/actionHelper';
+//import xlsx from 'xlsx';
+import {ExcelRenderer,excelToJson} from '../excel-reader';
 
 export const InputFile = () => {
-  const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('Choose File');
 
   const dispatch = useDispatch();
 
-  const onChange = (e) => {
+  const onGetExcelFilel =(e)=>{
     if (e.target.files[0].name) {
-      setFile(e.target.files[0]);
-      setFileName(e.target.files[0].name);
-    }
-  };
+     //  setFile(e.target.files[0]);
+       setFileName(e.target.files[0].name);
+ let fileObj = e.target.files[0]
+       ExcelRenderer(fileObj, (err, resp) => {
+         if(err){
+           console.log(err);            
+         }
+         else{
+          dispatch(setExcelWb(resp));
+       //   console.log(resp);
+         } 
+       }); 
+       excelToJson(fileObj, (err,resp)=>{
+        if(err){
+          console.log(err);            
+        }
+        else{
+          dispatch(setExcelJson(resp));
+      //  console.log(resp);
+        } 
+       })
+  }
+  }
 
-  useEffect(() => {
-    if (file) {
-      let wb = [];
-      let fileReader = new FileReader();
-      fileReader.readAsBinaryString(file);
-      fileReader.onload = (event) => {
-        let data = event.target.result;
-        let workbook = xlsx.read(data, { type: 'binary' });
-
-        workbook.SheetNames.forEach((sheet, i) => {
-          let rowObject = xlsx.utils.sheet_to_json(workbook.Sheets[sheet]);
-          wb.push({
-            sheetName: workbook.SheetNames[i],
-            sheetData: rowObject,
-          });
-          //  console.log(wb);
-          dispatch(setExcelWb(wb));
-        });
-      };
-    }
-  }, [file, dispatch]);
-
-
+ 
   return (
     <form>
         <div className="custom-file">
@@ -47,11 +44,12 @@ export const InputFile = () => {
             className="custom-file-input"
             id="customFile"
             accept=".xlsx,.xls, .csv "
-            onChange={onChange}
+            onChange={onGetExcelFilel}
             
           />
           <label className="custom-file-label text-center" htmlFor="customFile">{fileName}</label>
         </div>
+       
       </form>
   )
 }

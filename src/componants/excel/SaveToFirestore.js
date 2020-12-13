@@ -2,111 +2,43 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useFirestore } from 'react-redux-firebase';
 
-export const SaveToFirestore = () => {
-  const workBook = useSelector((state) => state.helpers.wb);
+export const SaveToFirestore = ({history}) => {
+  const objToSave = useSelector((state) => state.helpers.toSave);
+  const period =useSelector((state) =>state.firestore.ordered.options && state.firestore.ordered.options[0].actualPeriod)
+ 
+ // console.log(objToSave)
   const firestore = useFirestore();
 
-  async function toSave(rec) {
-    let counter = 0;
-    try {
-      const promise = firestore.collection('creditCard').add(rec);
-      promise.then((snap) => (counter = counter + 1));
-    } catch (e) {
-      console.log('Transaction failure:', e);
-    }
-    console.log('save of rec', counter);
-  }
-  async function toSaveAcount(rec) {
-    let counter = 0;
-    try {
-      const promise = firestore.collection('acount').add(rec);
-      promise.then((snap) => (counter = counter + 1));
-    } catch (e) {
-      console.log('Transaction failure:', e);
-    }
-    console.log('save of rec', counter);
-  }
-
   function onClickSaveAcount() {
+    const beorNo = objToSave.info.beorNo;
+    const id = `${period}-${beorNo}`
     let newRec = {
-      date: '',
-      teor: '',
-      asmacta: '',
-      debit: '',
-      creadit: '',
-      yitra: '',
-      valueDate: '',
+      beorNo:objToSave.info.beorNo,
+      kotarot:objToSave.info.kotarot,
+      teor:objToSave.info.teor,
+      user:objToSave.info.user,
+      data: objToSave.data.data.sheetData,
+      tableHead:objToSave.data.tebleHead,
+      date : new Date()
     };
-    workBook.map((tab) => {
-      newRec.cardNo = tab.sheetName;
-      console.log(tab.sheetName);
-      tab.sheetData.map((rec) => {
-        newRec.date = rec.date;
-        newRec.teor = rec.teor;
-        newRec.asmacta = rec.asmacta;
-        newRec.debit = rec.debit;
-        newRec.creadit = rec.creadit;
-        newRec.yitra = rec.yitra;
-        newRec.morDetele = rec.פירוט_נוסף;
-        //  console.log(newRec);
-        toSaveAcount(rec);
-        return null;
-      });
-      return null;
-    });
+    
+    firestore.collection('data').doc(id).set(newRec).then(() => history.push('/')).catch((err) => console.log(err))
   }
 
-  function onClickSave() {
-    let newRec = {
-      cardNo: '',
-      card: '',
-      debitDate: '',
-      buyDate: '',
-      betEsekName: '',
-      sumEeska: '',
-      sumDebit: '',
-      morDetele: '',
-      group: '',
-      list: '',
-    };
-
-    //  console.log(workBook);
-    workBook.map((tab) => {
-      newRec.cardNo = tab.sheetName;
-      console.log(tab.sheetName);
-      tab.sheetData.map((rec) => {
-        newRec.card = rec.כרטיס;
-        newRec.debitDate = rec.מועד_חיוב;
-        newRec.buyDate = rec.תאריך_רכישה;
-        newRec.betEsekName = rec.שם_בית_עסק;
-        newRec.sumEeska = rec.סכום_עסקה;
-        newRec.sumDebit = rec.סכום_חיוב;
-        newRec.morDetele = rec.פירוט_נוסף;
-        //  console.log(newRec);
-        toSave(rec);
-        return null;
-      });
-      return null;
-    });
-  }
+  
   return (
     <div>
-      <button
-        className="btn btn-outline-secondary"
-        type="button"
-        style={{ cursor: 'pointer' }}
-        onClick={onClickSave}
-      >
-        Save all tabs
-      </button>
-      <button
+      {objToSave && objToSave.data && objToSave.info ?(
+        <button
         className="btn btn-outline-secondary"
         type="button"
         style={{ cursor: 'pointer' }}
         onClick={onClickSaveAcount}
       >
-        שמור חשבון עוש
+       שמור קובץ ביאור {objToSave.info.beorNo}
       </button>
+      ):null}
+      
     </div>
   );
 };

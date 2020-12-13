@@ -6,9 +6,14 @@ import {
  // ADD_HAFKADA,
   // from hear
   SET_EXCEL_FILE,
+  SET_EXCEL_JSON,
   SET_IMG_URL,
   ADD_KOTARET,
-  DEL_KOTARET
+  DEL_KOTARET,
+  SET_WB_TO_SAVE,
+  SET_BEOR_INFO,
+  SRT_COL_HEADER,
+  SET_COL_HEADER
 } from './types';
 
 const initialState = {
@@ -17,7 +22,10 @@ const initialState = {
  // pratim: '',
   kot: [],
   wb: [],
+  json:[],
   imgUrl: '',
+  toSave:{},
+  colHeader: []
 };
 
 export default (state = initialState, action) => {
@@ -32,6 +40,17 @@ export default (state = initialState, action) => {
         ...state,
         wb: action.payload,
       };
+      case SET_EXCEL_JSON:
+      return {
+        ...state,
+        json: action.payload,
+      };
+      case SET_COL_HEADER:
+        return {
+          ...state,
+          colHeader:   action.payload
+        };
+
       case ADD_KOTARET:
         return {
           ...state,
@@ -42,6 +61,16 @@ export default (state = initialState, action) => {
        return {
           ...state,
             kot: action.payload
+       }
+       case   SET_BEOR_INFO:
+       return {
+        ...state,
+         toSave: {...state.toSave ,info:  action.payload  }
+       }
+       case   SET_WB_TO_SAVE:
+       return {
+          ...state,
+          toSave: {...state.toSave ,data: action.payload}
        }
     default:
       return state;

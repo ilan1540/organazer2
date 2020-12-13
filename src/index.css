@@ -48,4 +48,87 @@ a.dropdown-item {
 .table td,
 .table th {
   padding: 0;
+  border: none;
 }
+
+.table thead th {
+  border-bottom: none;
+}
+
+.head-div {
+  border-bottom: 1px solid black;
+  width: 99%;
+  height: 55px;
+  margin: 3px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.head-div p {
+  align-self: flex-end;
+  margin: 0;
+}
+
+caption {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: black;
+  font-weight: bold;
+  text-align: right;
+  font-size: large;
+  text-decoration: underline;
+  caption-side: top;
+}
+
+th {
+  text-align: center;
+}
+
+.under-line {
+  border-bottom: 1px solid;
+}
+
+.page-A4 {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5cm;
+  box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+  width: 21cm;
+  height: 29.7cm;
+}
+.page[size='A4'] {
+  width: 21cm;
+  height: 29.7cm;
+}
+.page[size='A4'][layout='landscape'] {
+  width: 29.7cm;
+  height: 21cm;
+}
+@media print {
+  body,
+  page {
+    margin: 0;
+    box-shadow: 0;
+  }
+}
+
+/*
+.page[size='A3'] {
+  width: 29.7cm;
+  height: 42cm;
+}
+.page[size='A3'][layout='landscape'] {
+  width: 42cm;
+  height: 29.7cm;
+}
+.page[size='A5'] {
+  width: 14.8cm;
+  height: 21cm;
+}
+.page[size='A5'][layout='landscape'] {
+  width: 21cm;
+  height: 14.8cm;
+}
+
+*/
