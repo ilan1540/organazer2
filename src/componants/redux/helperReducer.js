@@ -12,8 +12,8 @@ import {
   DEL_KOTARET,
   SET_WB_TO_SAVE,
   SET_BEOR_INFO,
-  SRT_COL_HEADER,
-  SET_COL_HEADER
+  SET_COL_HEADER,
+  SET_ACTUAL_HEADER
 } from './types';
 
 const initialState = {
@@ -25,7 +25,8 @@ const initialState = {
   json:[],
   imgUrl: '',
   toSave:{},
-  colHeader: []
+  baseHead: [],
+  actualHead: []
 };
 
 export default (state = initialState, action) => {
@@ -48,8 +49,14 @@ export default (state = initialState, action) => {
       case SET_COL_HEADER:
         return {
           ...state,
-          colHeader:   action.payload
+          baseHead:   action.payload
         };
+        case SET_ACTUAL_HEADER:
+        return {
+          ...state,
+          actualHead:   action.payload
+        };
+
 
       case ADD_KOTARET:
         return {

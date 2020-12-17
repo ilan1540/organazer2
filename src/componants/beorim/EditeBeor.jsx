@@ -4,15 +4,17 @@ import { PageHeader } from '../shared/PageHeader'
 import { useSelector} from 'react-redux';
 import { useFirestoreConnect, useFirestore } from 'react-redux-firebase';
 import { SelectUsre } from './SelectUsre';
-import { Kotarot } from './Kotarot';
-import { HeaderHendel } from '../tables/HeaderHendel';
+//import { EditKotarot } from './EditKotarot';
 
 
 
 export const EditeBeor = ({match,history}) => { 
   const [eBeor ,setEbeor] =useState()
   const [eKotarot ,setEkotarot] =useState()
+  const [colTeor, setColTeor] = useState()
   const firestore = useFirestore();
+
+  
 
   useFirestoreConnect([
     {
@@ -25,14 +27,18 @@ export const EditeBeor = ({match,history}) => {
     ({ firestore: { ordered } }) => ordered.beorimlist && ordered.beorimlist[0]
   );
 
-useEffect(()=>{
  
+
+useEffect(()=>{
   if(beor){
    setEbeor(beor)
-   setEkotarot(beor.kotarot)    
+   setEkotarot(beor.actualHead)    
   }
   
 },[beor])
+
+
+
  
   const onSaveClick = () =>{
     const newRec = {
@@ -40,7 +46,8 @@ useEffect(()=>{
        teor :eBeor.teor,
        tadirot:eBeor.tadirot,
        user:eBeor.user,
-       kotarot:eKotarot}
+       actualHead:eBeor.actualHead,
+      }
       firestore.collection('beorimlist').doc(eBeor.beorNo).set(newRec).then(() => history.push('/beorimList'))
       .catch((err) => console.log(err))
       
@@ -56,25 +63,20 @@ useEffect(()=>{
   }
 
   const onChangeHendel = (e) => {
-   setEbeor({...eBeor, [e.target.name]: e.target.value})
+   setEbeor({...eBeor, teor: e.target.value})
   };
 
-  const handelAdd = (fieldName,fieldTeor) => {
-    const addKoteret = {
-      fieldName,
-      fieldTeor,
-      id: Math.floor(Math.random()*100)
-    };
-    setEkotarot([...eKotarot, addKoteret]) 
-  };
-
-  const handelDel = (key) => {
-    const arr = eKotarot;
-    if (arr) {
-      const res = arr.filter((rec) => rec.id !== key);
-      setEkotarot( res)   
-    }
-  };
+  const onChangeColTeor = (e) => {
+   setColTeor({...colTeor, Header: e.target.value})
+   const rec = [{
+     Header: e.target.value,
+     accessor: e.target.name
+   }]
+ const res= eKotarot.map( obj => rec.find(o=>o.accessor=== obj.accessor)|| obj)
+ setEkotarot(res)
+setEbeor({...eBeor,actualHead:res})
+ 
+   };
 
   const deleteHandel = async () => {
     return await firestore
@@ -146,18 +148,49 @@ useEffect(()=>{
     </div>
         </form>
       </div>
-
+      {eBeor && beor.actualHead ? (
       <div className="col-md-8">
-        <HeaderHendel />
-      {eBeor ? (
-        <Kotarot
-       kotarot={eKotarot}
-       add={handelAdd}
-       del={handelDel} 
-       />
-      ):null}
+        <h4>עריכת כותרות</h4>
+   {colTeor ?(
+     <div className="input-group mb-3">
+     <span className="input-group-text" id="basic-addon1">{colTeor.accessor}</span>
+     <input type="text" className="form-control"  aria-describedby="basic-addon1"
+     name={colTeor.accessor}
+     value={colTeor.Header}
+     onChange={(e)=>onChangeColTeor(e)}
+     />
+     <button>update</button>
+   </div>
+   ):null}     
   
+<table className="table">
+  <thead>
+    
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">שם שדה</th>
+      <th scope="col">תיאור שדה</th>
+      </tr>
+</thead>
+<tbody>
+{eBeor.actualHead.map((rec)=>
+  <tr key={rec.accessor}>
+      <td >
+        <i
+         className="far fa-edit"
+        onClick={()=>setColTeor(rec)}
+      ></i></td>
+      <td>{rec.accessor}</td>
+      <td>{rec.Header}</td>
+      </tr>
+)}
+
+</tbody>
+</table>
+
+
       </div>
+        ):null}
     </div>
         ):null} 
 <input

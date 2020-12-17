@@ -88,6 +88,14 @@ th {
   border-bottom: 1px solid;
 }
 
+.CircleBtn {
+  border-radius: 50%;
+  padding: 25px;
+  font-weight: bold;
+  color: black;
+  margin-top: 80px;
+}
+
 .page-A4 {
   background: white;
   display: block;

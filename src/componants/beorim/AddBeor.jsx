@@ -3,40 +3,32 @@ import {Link} from 'react-router-dom'
 import { PageHeader } from '../shared/PageHeader'
 import {  useFirestore } from 'react-redux-firebase'
 import { SelectUsre } from './SelectUsre'
-import { Kotarot } from './Kotarot';
+//import { Kotarot } from './Kotarot';
+import {InputFile} from '../excel/InputFile'
+import { SheetTabs } from '../shared/SheetTabs'
+import { HeaderHendel } from '../tables/HeaderHendel';
+import {useSelector} from 'react-redux'
 
 export const AddBeor = ({history}) => {
   const [beorNo ,setBeorNo] =useState('')
   const [tadirot ,setTadirot] =useState('year')
   const [teor ,setTeor] =useState('')
   const [user ,setUser] =useState('')
-  const [kotarot ,setKotarot] =useState([])
   
-
+  
   const fireStore = useFirestore()
 
-  const handelAdd = (fieldName,fieldTeor) => {
-    const addKoteret = {
-      fieldName,
-      fieldTeor,
-      id: Math.floor(Math.random()*100)
-    }; 
-    setKotarot([...kotarot, addKoteret]);
-  };
+  const actualHead = useSelector(state => state.helpers.actualHead)
 
-  const handelDel = (key) => {
-    const arr = kotarot;
-    if (arr) {
-      const res = arr.filter((rec) => rec.id !== key);   
-  setKotarot(res);   
-    }
-  };
+ 
+
+  
  
   const onSaveClick = () =>{
     if (beorNo === '' || teor === '') {
       console.log('err');
     } else {
-      const newRec = {beorNo,teor,tadirot,user,kotarot}
+      const newRec = {beorNo,teor,tadirot,user,actualHead}
       fireStore.collection('beorimlist').doc(beorNo).set(newRec).then(() => history.push('/beorimList'))
       .catch((err) => console.log(err))
       
@@ -101,12 +93,13 @@ export const AddBeor = ({history}) => {
       </form>  
       </div>
       <div className="col-md-8">
-        <Kotarot
-        kotarot={kotarot}
-        add={handelAdd}
-        del={handelDel} 
+        <div className="form-group">
+          <label>שדות ביאור בהתאם לקובץ</label>
+          <InputFile />
+          <SheetTabs />
+        </div>
+        <HeaderHendel />
         
-        />
       </div>
       <input
             type="submit"
@@ -120,3 +113,33 @@ export const AddBeor = ({history}) => {
     </div>
   )
 }
+
+
+/*
+<Kotarot
+        kotarot={kotarot}
+        add={handelAdd}
+        del={handelDel} 
+        
+        />
+*/
+
+
+/*
+const handelAdd = (fieldName,fieldTeor) => {
+    const addKoteret = {
+      fieldName,
+      fieldTeor,
+      id: Math.floor(Math.random()*100)
+    }; 
+    setKotarot([...kotarot, addKoteret]);
+  };
+
+  const handelDel = (key) => {
+    const arr = kotarot;
+    if (arr) {
+      const res = arr.filter((rec) => rec.id !== key);   
+  setKotarot(res);   
+    }
+  };
+*/

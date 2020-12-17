@@ -17,6 +17,7 @@ import {
   SET_WB_TO_SAVE,
   SET_EXCEL_JSON,
   SET_COL_HEADER,
+  SET_ACTUAL_HEADER
 } from './types';
 
 //set img url to redux
@@ -47,14 +48,22 @@ export const setExcelJson = (wb) => {
     payload: wb,
   };
 };
-// set col Header to redux
+// set col Header from excel file to redux
 export const setColHeader = (head) => {
-  console.log(head)
   return {
     type: SET_COL_HEADER,
     payload: head,
   };
 };
+
+// set col update Header  to redux
+export const setActualHeader = (head) => {
+  return {
+    type: SET_ACTUAL_HEADER,
+    payload: head,
+  };
+};
+
 
 
 // save kotarot to redux

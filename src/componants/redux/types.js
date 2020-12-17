@@ -13,6 +13,7 @@ export const DEL_KOTARET ='DEL_KOTARET';
 export const SET_BEOR_INFO = 'SET_BEOR_INFO';
 export const SET_WB_TO_SAVE ='SET_WB_TO_SAVE';
 export const SET_COL_HEADER = 'SET_COL_HEADER'
+export const SET_ACTUAL_HEADER = 'SET_ACTUAL_HEADER'
 
 
 
