@@ -3,16 +3,16 @@ import {useSelector} from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
 import {numberWithCommas} from '../redux/globalFunc'
 
-export const Tabale_P_10 = ({beorNo,qte}) => {
+export const Tabale_p_10 = ({beorNo,qte}) => {
    useFirestoreConnect([
     {
       collection: 'data',
       doc: `${qte}-${beorNo}`
     }
   ])
-
+// כותרות דוח
   const list= useSelector(state => state.firestore.ordered.options&& state.firestore.ordered.options[1].list)
-      console.log(list)
+    
   
 
   const data = useSelector(

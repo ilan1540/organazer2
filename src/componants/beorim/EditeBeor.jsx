@@ -26,16 +26,14 @@ export const EditeBeor = ({match,history}) => {
   var beor = useSelector(
     ({ firestore: { ordered } }) => ordered.beorimlist && ordered.beorimlist[0]
   );
-
- 
+  var actualHead = useSelector(
+    ({ firestore: { ordered } }) => ordered.beorimlist && ordered.beorimlist[0].actualHead
+  );
 
 useEffect(()=>{
-  if(beor){
    setEbeor(beor)
-   setEkotarot(beor.actualHead)    
-  }
-  
-},[beor])
+   setEkotarot(actualHead)    
+},[beor,actualHead])
 
 
 
@@ -159,7 +157,7 @@ setEbeor({...eBeor,actualHead:res})
      value={colTeor.Header}
      onChange={(e)=>onChangeColTeor(e)}
      />
-     <button>update</button>
+    
    </div>
    ):null}     
   
@@ -167,13 +165,13 @@ setEbeor({...eBeor,actualHead:res})
   <thead>
     
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">עריכה</th>
       <th scope="col">שם שדה</th>
       <th scope="col">תיאור שדה</th>
       </tr>
 </thead>
 <tbody>
-{eBeor.actualHead.map((rec)=>
+{eKotarot && eKotarot.map((rec)=>
   <tr key={rec.accessor}>
       <td >
         <i

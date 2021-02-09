@@ -2,7 +2,7 @@ import React,{useMemo,useEffect,useState} from 'react'
 import {useTable} from 'react-table'
 import {useSelector} from 'react-redux'
 import {useFirestoreConnect} from 'react-redux-firebase'
-import  './table.css'
+//import  './table.css'
 
 export const ShowTable = () => {
   const [myData, setMyData] =useState([])
