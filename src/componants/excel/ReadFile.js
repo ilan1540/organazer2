@@ -1,14 +1,17 @@
 import React,{useState} from 'react'
 import{PageHeader} from '../shared/PageHeader'
-import { SelectFromList } from '../shared/SelectFromList'
+//import { SelectFromList } from '../shared/SelectFromList'
+import{SelectFromTaskList} from './SelectFromTaskList'
 import { InputFile } from './InputFile'
 import {ShowWorkBook} from './ShowWorkBook'
 import {useSelector } from 'react-redux';
 import { Switch } from '../switch/Switch'
 
-export const ReadFile = () => {
+export const ReadFile = ({history}) => {
   const [btnValue, setBtnValue] = useState(true);
   const userName = useSelector((state) =>state.firestore.ordered.users && state.firestore.ordered.users[0].displayName);
+
+  
 
  
 
@@ -23,11 +26,11 @@ export const ReadFile = () => {
          handleToggle={() => setBtnValue(!btnValue)}
          />
          
-         {userName ?(<SelectFromList 
+         {userName ?(<SelectFromTaskList 
          user={userName}
          isAllUsers={btnValue}         
          />):null}
-         <ShowWorkBook />
+         <ShowWorkBook history={history} />
     </div>
   )
 }

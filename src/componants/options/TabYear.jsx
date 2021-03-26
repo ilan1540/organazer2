@@ -3,7 +3,7 @@ import {  useFirestore } from 'react-redux-firebase';
 import { PageHeader } from '../shared/PageHeader'
 import { PeriodsList } from './PeriodsList';
 
-export const TabYear = () => {
+export const TabYear = ({history}) => {
   const [year,setYear] =useState('yyyy')
   const [month,setMonth] =useState('Q1')
   const [period,setPeriod] =useState('')
@@ -24,10 +24,7 @@ export const TabYear = () => {
   } else {
     const newPeriod = {period,year,month}
     fireStore.collection('periods').add(newPeriod)
-    .then(() =>{
-      setYear('yyyy')
-      setMonth('Q1')
-    } ).then(()=>console.log('record add success'))
+    .then(history.push('/'))
     .catch((err) => console.log(err))
   }
 
@@ -40,7 +37,7 @@ console.log(period)
         <div className="row">
         
         <div className="col-md-3 mx-auto">
-          <PeriodsList  />
+          <PeriodsList history={history} />
       </div>
       <div className="col-md-6 mx-auto ">
      

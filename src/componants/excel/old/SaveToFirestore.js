@@ -5,35 +5,26 @@ import { useFirestore } from 'react-redux-firebase';
 export const SaveToFirestore = ({history}) => {
   const objToSave = useSelector((state) => state.helpers.toSave);
   const period =useSelector((state) =>state.firestore.ordered.options && state.firestore.ordered.options[0].period)
-
-  const taskId = useSelector(state => state.helpers.toSave.info && state.helpers.toSave.info.id)
  
- // console.log(history)
+ // console.log(objToSave)
   const firestore = useFirestore();
 
-  function onClickSaveAcount() {
+  function  onClickSaveAcount() {
     const kelet=  objToSave.data.data.sheetData[0].period
-    const keletTaskId = objToSave.data.data.sheetData[0].taskId
-    if (period===kelet && parseInt(taskId )=== parseInt(keletTaskId)){
-      objToSave.data.data.sheetData.map((rec)=>{      
+    if (period===kelet) {
+      objToSave.data.data.sheetData.map((rec)=>{
+        const id = rec.itemNo
           const newRec= {
             ...rec,
-            taskId:taskId,
+            beorNo:objToSave.info.beorNo,
+            user:objToSave.info.user,
             date : new Date()
           }
-       return   firestore.collection('data').add(newRec).then(console.log('קובץ נקלט')
-          
-        ).catch((err) => console.log(err))
+        return  firestore.collection(`${period}`).doc(`${id}`).set(newRec).then(() => history.push('/')).catch((err) => console.log(err))
       })
-       firestore.collection('taskList').doc(taskId).update({info:[{user:objToSave.info.user,
-        date: Date(),
-        sog: 'קלט',
-        period: period
-      }]}).then(history.push('/endkelet')).catch((err) => console.log(err))
        }else{
-      console.log('תקופה שגויה  או מספר משימה בדוק קובץ קלט')
+      console.log('תקופה שגויה בדוק קובץ קלט')
       }
-     
   }
 
   

@@ -5,51 +5,71 @@ import {useFirestoreConnect} from 'react-redux-firebase'
 //import  './table.css'
 
 export const ShowTable = () => {
-  const [myData, setMyData] =useState([])
-  const [header, setHeader] =useState([])
-  useFirestoreConnect([
+  const [myData, setMyData] =useState([
     {
-      collection: 'data',
-      doc: 'undefined-10-112'
-    }
+      itemName:'נכסים בלתי מוחשיים',
+      beorMo: 5,
+      currValue: 1196622,
+      pervValue: 1256508,
+      lastYear: 1247380
+    },
+    {
+      itemName:'הוצאות רכישה נדחות',
+      beorMo: 6,
+      currValue: 2022426,
+      pervValue: 1983207,
+      lastYear: 2021204
+    },
+    
+
   ])
+  const [header, setHeader] =useState([
+    {
+      Header: 'אלפי שח',
+      accessor: 'itemName', 
+    },
+    {
+      Header: 'ביאור',
+      accessor: 'beorMo',
+    },
+    {
+      Header: 'ליום 30 בספטמבר',
+      columns:[{
+        Header: 'בלתי מבוקר',
+        columns:[
+          {
+            Header: 'year',
+            accessor: 'currValue',
+          },
+          {
+            Header: 'year-1',
+            accessor: 'pervValue',
+          },
+        ]
+      },
+      
+      ]
+    },
 
-  const data1 = useSelector(
-    ({ firestore: { ordered } }) => ordered.data  && ordered.data[0].data
-  )
-  const head = useSelector(
-    ({ firestore: { ordered } }) => ordered.data  && ordered.data[0].tableHead
-  )
- 
-useEffect(()=>{
-  const col= []
-  if(head){
-    head.map((rec)=> col.push({
-        Header : rec,
-        accessor: rec
-      })
-    )
-    setHeader(col)
-  }
-},[head])
+    {
+      Header: 'ליום 31 בדצמבר',
+      columns:[{
+        Header: 'מבוקר',
+        columns:[
+          {
+            Header: 'Last Year',
+            accessor: 'lastYear',
+          },
+        ]
+      }]
+    },
+   
+  ])
+  const [data1, setdata1] =useState([])
 
- 
- useEffect(()=>{
-  const temp = []
-   if(data1){
-    data1.map((rec)=>JSON.stringify(temp.push((rec))))
-    setMyData(temp)
-   }
- 
- },[data1])
- 
-
-const columns = useMemo(()=> header,[header])
-const data = useMemo(()=> myData ,[myData])
-
-
+const columns = useMemo(()=> header,[])
+const data = useMemo(()=> myData ,[])
 const tableInstance =  useTable({columns,data})
-
 const {
   getTableProps,
   getTableBodyProps,
@@ -58,12 +78,11 @@ const {
   prepareRow,
 } = tableInstance
 
-  
-  
   return (
     <div className="container mt-5">
+      <h1>table</h1>
       {data1 ?(
-       <table {...getTableProps()} >
+       <table className="table" {...getTableProps()} >
        <thead>
          {headerGroups.map(headerGroup => (
            <tr {...headerGroup.getHeaderGroupProps()}>
@@ -102,3 +121,44 @@ const {
     </div>
   )
 }
+
+
+
+ /* 
+  useFirestoreConnect([
+    {
+      collection: 'data',
+      doc: 'undefined-10-112'
+    }
+  ])
+
+  const data1 = useSelector(
+    ({ firestore: { ordered } }) => ordered.data  && ordered.data[0].data
+  )
+  const head = useSelector(
+    ({ firestore: { ordered } }) => ordered.data  && ordered.data[0].tableHead
+  )
+ 
+useEffect(()=>{
+  const col= []
+  if(head){
+    head.map((rec)=> col.push({
+        Header : rec,
+        accessor: rec
+      })
+    )
+    setHeader(col)
+  }
+},[head])
+
+ 
+ useEffect(()=>{
+  const temp = []
+   if(data1){
+    data1.map((rec)=>JSON.stringify(temp.push((rec))))
+    setMyData(temp)
+   }
+ 
+ },[data1])
+ 
+*/

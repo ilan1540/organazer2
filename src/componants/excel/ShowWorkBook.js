@@ -4,7 +4,7 @@ import { useSelector ,useDispatch } from 'react-redux';
 import { setDataToSave} from '../redux/actionHelper'
 import {OutTable} from '../excel-reader';
 
-export const ShowWorkBook = () => {
+export const ShowWorkBook = ({history}) => {
   const [sheetData, setSheetData] = useState();
   const [sheetInfo, setSheetInfo] = useState();
   const [tableHeader, setTableHeader] =useState()
@@ -95,7 +95,7 @@ const dispatch = useDispatch()
             </div>
           ))}
           <div>
-            <SaveToFirestore />
+            <SaveToFirestore history={history} />
           </div>
         </div>
       ) : null}

@@ -2,7 +2,8 @@ import React,{useState} from 'react'
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect, useFirestore } from 'react-redux-firebase';
 
-export const PeriodsList = () => {
+
+export const PeriodsList = ({history}) => {
   const [actualPeriod,setActualPeriod] =useState('')
   const fireStore = useFirestore()
 useFirestoreConnect('periods')
@@ -10,7 +11,7 @@ useFirestoreConnect('periods')
 
 const periods = useSelector(state => state.firestore.ordered.periods)
 
-const period= useSelector(state => state.firestore.ordered.options[0].actualPeriod)
+const period= useSelector(state =>state.firestore.ordered.options && state.firestore.ordered.options[0].actualPeriod)
 
 
 const onSaveClick =()=>{
@@ -20,7 +21,7 @@ const onSaveClick =()=>{
   const rec= periods.find((r)=> r.period === actualPeriod)
     fireStore.collection('options').doc('actualPeriod').set(rec)
     .then(() =>{
-    } ).then(()=>console.log('actual period set success'))
+    } ).then(history.push('/'))
    .catch((err) => console.log(err)) 
 }}
 

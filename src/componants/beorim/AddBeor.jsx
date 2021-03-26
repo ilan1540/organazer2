@@ -6,7 +6,7 @@ import { SelectUsre } from './SelectUsre'
 //import { Kotarot } from './Kotarot';
 import {InputFile} from '../excel/InputFile'
 import { SheetTabs } from '../shared/SheetTabs'
-import { HeaderHendel } from '../tables/HeaderHendel';
+//import { HeaderHendel } from '../tables/HeaderHendel';
 import {useSelector} from 'react-redux'
 
 export const AddBeor = ({history}) => {
@@ -19,8 +19,6 @@ export const AddBeor = ({history}) => {
   const fireStore = useFirestore()
 
   const actualHead = useSelector(state => state.helpers.actualHead)
-
- 
 
   
  
@@ -98,7 +96,7 @@ export const AddBeor = ({history}) => {
           <InputFile />
           <SheetTabs />
         </div>
-        <HeaderHendel />
+        
         
       </div>
       <input

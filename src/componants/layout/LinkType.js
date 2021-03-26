@@ -34,9 +34,17 @@ export const manage = {
   btnName:'ניהול',
   prams:[
     {
-    href:"/tabOptions",
-    name:'אפשרויות'
-  },
+      href:"/period",
+      name:'ניהול תקופות'
+    },
+    {
+      href:"/itemlist",
+      name:'קלט פריטים מרוכז'
+    },
+    {
+      href:"/groping",
+      name:'קיבוץ פריטים'
+    },
   {
     href:"/register",
     name:'Register'
@@ -48,6 +56,10 @@ export const manage = {
   {
     href:"/beorimList",
     name:'רשימת באורים'
+  },
+  {
+    href:"/taskslist",
+    name:'רשימת משימות'
   },
   {
     href:"/kotarot",

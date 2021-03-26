@@ -45,6 +45,11 @@ a.dropdown-item {
   color: darkmagenta;
 }
 
+.thead-x {
+  background-color: wheat;
+  color: black;
+}
+
 .table td,
 .table th {
   padding: 3px;
@@ -53,15 +58,19 @@ a.dropdown-item {
 
 .table thead th {
   border-bottom: none;
-  padding-top: 6px;
+  /* padding-top: 6px;
   padding-bottom: 6px;
   padding-right: 3px;
+   text-align: right;*/
+}
+.table tbody td {
   text-align: right;
+  padding-right: 30px;
 }
 
 .head-div {
   border-bottom: 1px solid black;
-  width: 99%;
+  width: 96%;
   height: 55px;
   margin: 3px;
   display: flex;
@@ -73,7 +82,7 @@ a.dropdown-item {
   margin: 0;
 }
 
-caption {
+.caption {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   color: black;
